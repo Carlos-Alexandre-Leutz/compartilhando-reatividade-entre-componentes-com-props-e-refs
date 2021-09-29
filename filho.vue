@@ -37,24 +37,23 @@ export default {
     components: { money3: Money3Component },
     props: {
         ViewModel: {
-            type: [String],
+            type: [String, Number],
             required: false,
-            default: "",
+            default: 0,
         },
     },
-    setup(props) {
-        let valueInput = ref();
-        
+    emits: ["teste"],
+    setup(props, context) {
+        let valueInput = ref(0);
+
         watch(props, () => {
-            console.log("vMOdel mudou", props.ViewModel);
-            valueInput.value = props.ViewModel
+            valueInput.value = props.ViewModel;
         });
-        return{
-            valueInput
-        }
-    },
-    data() {
+        watch(valueInput, () => {
+            context.emit("teste", valueInput.value);
+        });
         return {
+            valueInput,
             amount: "12345.67",
             config: {
                 masked: false,
