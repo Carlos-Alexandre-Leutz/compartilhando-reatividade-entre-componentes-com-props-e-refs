@@ -1,9 +1,16 @@
 <template>
     <div>
+        
+        <label for="">pai</label>
+        <input type="number" v-model="ViewModel"/>
+        <br>
+          <label for="">filho</label>
         <auto-numeric-input
         :ViewModel="ViewModel"
+        @teste="funcao"
+       
         ></auto-numeric-input>
-        <input v-model="ViewModel"/>:
+
 
 
     </div>
@@ -17,9 +24,14 @@ export default {
         AutoNumericInput
     },
     setup() {
-        let ViewModel = ref();
+        let ViewModel = ref(0);
+        const funcao = (e) =>{
+            console.log("atiualiza vw", e)
+            ViewModel.value = e;
+        }
         return{
-            ViewModel
+            ViewModel,
+            funcao
         }
     },
 };
